@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Plugin.DeviceSensors</name>
+    </assembly>
+    <members>
+        <member name="T:Plugin.DeviceSensors.Shared.DeviceSensorReadingInterval">
+            <summary>
+            Device sensor reading interval enum.
+            </summary>
+        </member>
+        <member name="F:Plugin.DeviceSensors.Shared.DeviceSensorReadingInterval.Fastest">
+            <summary>
+            Fastest Delay
+            </summary>
+        </member>
+        <member name="F:Plugin.DeviceSensors.Shared.DeviceSensorReadingInterval.Game">
+            <summary>
+            Game Delay
+            </summary>
+        </member>
+        <member name="F:Plugin.DeviceSensors.Shared.DeviceSensorReadingInterval.Ui">
+            <summary>
+            Ui Delay
+            </summary>
+        </member>
+        <member name="F:Plugin.DeviceSensors.Shared.DeviceSensorReadingInterval.Default">
+            <summary>
+            Default Delay
+            </summary>
+        </member>
+        <member name="T:Plugin.DeviceSensors.Shared.VectorReading">
+            <summary>
+            Device sensor vector.
+            </summary>
+        </member>
+        <member name="P:Plugin.DeviceSensors.Shared.VectorReading.X">
+            <summary>
+            Gets the x.
+            </summary>
+            <value>The x.</value>
+        </member>
+        <member name="P:Plugin.DeviceSensors.Shared.VectorReading.Y">
+            <summary>
+            Gets the y.
+            </summary>
+            <value>The y.</value>
+        </member>
+        <member name="P:Plugin.DeviceSensors.Shared.VectorReading.Z">
+            <summary>
+            Gets the z.
+            </summary>
+            <value>The z.</value>
+        </member>
+        <member name="M:Plugin.DeviceSensors.Shared.VectorReading.ToString">
+            <summary>
+            Vector to string
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Plugin.DeviceSensors.CrossDeviceSensors">
+            <summary>
+            Cross DeviceSensors
+            </summary>
+        </member>
+        <member name="P:Plugin.DeviceSensors.CrossDeviceSensors.IsSupported">
+            <summary>
+            Gets if the plugin is supported on the current platform.
+            </summary>
+        </member>
+        <member name="P:Plugin.DeviceSensors.CrossDeviceSensors.Current">
+            <summary>
+            Current plugin implementation to use
+            </summary>
+        </member>
+    </members>
+</doc>

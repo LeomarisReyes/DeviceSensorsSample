@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:DeviceSensorsSample" x:Class="DeviceSensorsSample.DeviceSensorsSamplePage">
+	<StackLayout Spacing="4">
+        <StackLayout Spacing="4">  
+            <Frame CornerRadius="8" BackgroundColor="Silver" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                     <Label x:Name="lblTitle" Text="Sensors List"/>
+            </Frame>   
+       </StackLayout>
+        <StackLayout Spacing="3" x:Name="mainLayout">
+            <ListView x:Name="listSensores" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding ListDevices}">
+                  <ListView.ItemTemplate> 
+                        <DataTemplate> 
+                          <ViewCell> 
+                               <StackLayout Spacing="4">  
+                                <Frame HasShadow = "true" CornerRadius="20" BackgroundColor="#cce6ff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label Text="{Binding SensorName}" />
+                                    <Label.GestureRecognizers>
+                                       <TapGestureRecognizer Command="{Binding Path=BindingContext.ActionSensor, Source={x:Reference mainLayout}}" CommandParameter="{Binding SensorName}"/>
+                                    </Label.GestureRecognizers>
+                                  </Frame>
+                                </StackLayout>
+                          </ViewCell>
+                        </DataTemplate>
+                  </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
