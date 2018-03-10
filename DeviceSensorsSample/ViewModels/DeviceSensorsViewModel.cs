@@ -5,11 +5,13 @@ using Plugin.DeviceSensors.Shared;
 using DeviceSensorsSample.Models;
 using System.ComponentModel;
 using Xamarin.Forms;
+using DeviceSensorsSample.Views;
 
 namespace DeviceSensorsSample.ViewModels
 {
     public class DeviceSensorsViewModel : INotifyPropertyChanged   
     {
+        public Sensors Sensors                { get; set; }
         public List<Sensors>   ListDevices    { get; set; }
         public Command<string> ActionSensor   { get; set; }
         public DeviceSensorsViewModel()
@@ -28,7 +30,7 @@ namespace DeviceSensorsSample.ViewModels
             ListDevices.Add(new Sensors() { SensorName = "Pedometer"     });                          
         }
 
-        public void SelectedSensor(string SensorName){
+        public async void SelectedSensor(string SensorName){
              
             if(SensorName == "Acelerometer"){
                 Acelerometer();
@@ -48,7 +50,9 @@ namespace DeviceSensorsSample.ViewModels
 			else if (SensorName == "Pedometer")
 			{
 				Pedometer();
-			}
+			} 
+
+            await App.Navigation.PushAsync(new SensorDetailsPage()); 
         }
 
 		public interface IDeviceSensor<T>
@@ -73,16 +77,19 @@ namespace DeviceSensorsSample.ViewModels
 		}
 
         public void Acelerometer (){
-			if (CrossDeviceSensors.Current.Accelerometer.IsSupported)
-			{
-				CrossDeviceSensors.Current.Accelerometer.OnReadingChanged += (s, a) =>
-				{
-                    System.Diagnostics.Debug.WriteLine(" OnReadingChanged - Acelerometer   : X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
-				};
-				CrossDeviceSensors.Current.Accelerometer.StartReading();
-                System.Diagnostics.Debug.WriteLine(" StartReading");
+            try
+            {
+                if (CrossDeviceSensors.Current.Accelerometer.IsSupported)
+                {
+                    CrossDeviceSensors.Current.Accelerometer.OnReadingChanged += (s, a) =>
+                    {
+                        System.Diagnostics.Debug.WriteLine(" OnReadingChanged - Acelerometer   : X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
+                    };
+                    CrossDeviceSensors.Current.Accelerometer.StartReading();
+                    System.Diagnostics.Debug.WriteLine(" StartReading");
 
-			}
+                }
+            }catch{}
 			System.Diagnostics.Debug.WriteLine(" Acelerometer");
 
 		}

@@ -4,13 +4,15 @@ namespace DeviceSensorsSample
 {
     public partial class App : Application
     {
+        public static INavigation Navigation { get; set; }
         public App()
         {
             InitializeComponent();
-
-            MainPage = new DeviceSensorsSamplePage();
-        }
-
+            var NavPage = new NavigationPage(new DeviceSensorsSamplePage());
+            Navigation = NavPage.Navigation;
+            MainPage = NavPage;
+        } 
+       
         protected override void OnStart()
         {
             // Handle when your app starts

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DeviceSensorsSample.Views.SensorDetailsPage">
+	<ContentPage.Content>
+        <StackLayout Spacing="4">
+              
+        <StackLayout Spacing="4">  
+            <Frame CornerRadius="8" BackgroundColor="Silver" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                     <Label x:Name="lblTitle" Text="Sensor Details"/>
+            </Frame>   
+       </StackLayout>
+       <StackLayout Spacing="4">  <Label x:Name="lblTitleX" Text="X: " FontSize="15" FontAttributes="Bold" />
+                     <Label x:Name="lblDescriptionX" Text=""/>
+                    
+                     <Label x:Name="lblTitleY" Text="Y: " FontSize="15" FontAttributes="Bold" />
+                     <Label x:Name="lblDescriptionY" Text=""/>
+                   
+                     <Label x:Name="lblTitleZ" Text="Z: " FontSize="15" FontAttributes="Bold"/>
+                     <Label x:Name="lblDescriptionZ" Text=""/> 
+       </StackLayout> 
+    </StackLayout> 
+	</ContentPage.Content>
+</ContentPage>
