@@ -9,13 +9,13 @@
             </Frame>   
        </StackLayout>
        <StackLayout Spacing="4">  <Label x:Name="lblTitleX" Text="X: " FontSize="15" FontAttributes="Bold" />
-                     <Label x:Name="lblDescriptionX" Text=""/>
+                     <Label x:Name="lblDescriptionX" Text="{Binding X}"/>
                     
                      <Label x:Name="lblTitleY" Text="Y: " FontSize="15" FontAttributes="Bold" />
-                     <Label x:Name="lblDescriptionY" Text=""/>
+                     <Label x:Name="lblDescriptionY" Text="{Binding Y}"/>
                    
                      <Label x:Name="lblTitleZ" Text="Z: " FontSize="15" FontAttributes="Bold"/>
-                     <Label x:Name="lblDescriptionZ" Text=""/> 
+                     <Label x:Name="lblDescriptionZ" Text="{Binding Z}"/> 
        </StackLayout> 
     </StackLayout> 
 	</ContentPage.Content>

@@ -84,8 +84,15 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Plugin.DeviceSensors">
-      <HintPath>..\packages\Plugin.DeviceSensors.0.1.0-alpha\lib\netstandard1.0\Plugin.DeviceSensors.dll</HintPath>
+      <HintPath>..\packages\Plugin.DeviceSensors.0.1.0-alpha\lib\monoandroid80\Plugin.DeviceSensors.dll</HintPath>
     </Reference>
+    <Reference Include="Java.Interop" />
+    <Reference Include="System.Collections" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DeviceSensorsSample\DeviceSensorsSample.csproj">

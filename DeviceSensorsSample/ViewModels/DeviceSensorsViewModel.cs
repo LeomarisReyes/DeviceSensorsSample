@@ -6,14 +6,19 @@ using DeviceSensorsSample.Models;
 using System.ComponentModel;
 using Xamarin.Forms;
 using DeviceSensorsSample.Views;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace DeviceSensorsSample.ViewModels
 {
     public class DeviceSensorsViewModel : INotifyPropertyChanged   
     {
-        public Sensors Sensors                { get; set; }
+        public Sensors Sensor                 { get; set; }
         public List<Sensors>   ListDevices    { get; set; }
         public Command<string> ActionSensor   { get; set; }
+        public double Cx { get; set; }
+        double Cy, Cz; 
+
         public DeviceSensorsViewModel()
         {
             ActionSensor = new Command<string>(SelectedSensor);
@@ -52,7 +57,7 @@ namespace DeviceSensorsSample.ViewModels
 				Pedometer();
 			} 
 
-            await App.Navigation.PushAsync(new SensorDetailsPage()); 
+            await App.Navigation.PushAsync(new SensorDetailsPage(Sensor)); 
         }
 
 		public interface IDeviceSensor<T>
@@ -76,22 +81,20 @@ namespace DeviceSensorsSample.ViewModels
 			IDeviceSensor<int>                  Pedometer     { get; }
 		}
 
-        public void Acelerometer (){
+        public async void Acelerometer (){
             try
             {
                 if (CrossDeviceSensors.Current.Accelerometer.IsSupported)
-                {
+                { 
                     CrossDeviceSensors.Current.Accelerometer.OnReadingChanged += (s, a) =>
-                    {
+                    { 
+                       // Sensor = new Sensors() { SensorName = "Acelerometer" , X = a.Reading.X, Y = a.Reading.Y, Z = a.Reading.Z };
                         System.Diagnostics.Debug.WriteLine(" OnReadingChanged - Acelerometer   : X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
                     };
-                    CrossDeviceSensors.Current.Accelerometer.StartReading();
-                    System.Diagnostics.Debug.WriteLine(" StartReading");
-
+                    CrossDeviceSensors.Current.Accelerometer.StartReading(3000); 
                 }
-            }catch{}
-			System.Diagnostics.Debug.WriteLine(" Acelerometer");
-
+            }catch{ 
+            }
 		}
 
 		public void Gyroscope()
@@ -99,10 +102,11 @@ namespace DeviceSensorsSample.ViewModels
 			if (CrossDeviceSensors.Current.Gyroscope.IsSupported)
 			{
 				CrossDeviceSensors.Current.Gyroscope.OnReadingChanged += (s, a) =>
-				{
+				{ 
+                   
 					System.Diagnostics.Debug.WriteLine("OnReadingChanged: Gyroscope  X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
 				};
-				CrossDeviceSensors.Current.Gyroscope.StartReading();
+				CrossDeviceSensors.Current.Gyroscope.StartReading(3000);
 				System.Diagnostics.Debug.WriteLine("StartReading: Gyroscope ");
 
 			}
@@ -114,7 +118,7 @@ namespace DeviceSensorsSample.ViewModels
             if (CrossDeviceSensors.Current.Magnetometer.IsSupported)
 			{
                 CrossDeviceSensors.Current.Magnetometer.OnReadingChanged += (s, a) =>
-				{
+				{ 
 					System.Diagnostics.Debug.WriteLine("OnReadingChanged: Magnetometer  X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
 				};
                 CrossDeviceSensors.Current.Magnetometer.StartReading();
@@ -129,7 +133,7 @@ namespace DeviceSensorsSample.ViewModels
             if (CrossDeviceSensors.Current.Barometer.IsSupported)
 			{
                 CrossDeviceSensors.Current.Barometer.OnReadingChanged += (s, a) =>
-				{
+				{ 
                     System.Diagnostics.Debug.WriteLine("OnReadingChanged: Barometer -> " + a.Reading.ToString());
 				};
                 CrossDeviceSensors.Current.Barometer.StartReading();
@@ -144,7 +148,7 @@ namespace DeviceSensorsSample.ViewModels
 			if (CrossDeviceSensors.Current.Pedometer.IsSupported)
 			{
 				CrossDeviceSensors.Current.Pedometer.OnReadingChanged += (s, a) =>
-				{
+				{ 
 					System.Diagnostics.Debug.WriteLine("OnReadingChanged: Pedometer -> " + a.Reading.ToString());
 				};
 				CrossDeviceSensors.Current.Pedometer.StartReading();
@@ -153,7 +157,7 @@ namespace DeviceSensorsSample.ViewModels
 			}
             System.Diagnostics.Debug.WriteLine(" Pedometer");
 		}
-
+         
         public event PropertyChangedEventHandler PropertyChanged;
 }
 }

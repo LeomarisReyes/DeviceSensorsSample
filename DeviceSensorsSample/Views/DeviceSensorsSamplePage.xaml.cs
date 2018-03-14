@@ -11,7 +11,7 @@ namespace DeviceSensorsSample
         {
             InitializeComponent();
             BindingContext = new DeviceSensorsViewModel();
-
+             
             if(Device.RuntimePlatform == Device.iOS)
             {
                 this.Padding = new Thickness(0, 20, 0, 0);
