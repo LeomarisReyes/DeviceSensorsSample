@@ -15,9 +15,7 @@ namespace DeviceSensorsSample.ViewModels
     {
         public Sensors Sensor                 { get; set; }
         public List<Sensors>   ListDevices    { get; set; }
-        public Command<string> ActionSensor   { get; set; }
-        public double Cx { get; set; }
-        double Cy, Cz; 
+        public Command<string> ActionSensor   { get; set; } 
 
         public DeviceSensorsViewModel()
         {
@@ -35,8 +33,8 @@ namespace DeviceSensorsSample.ViewModels
             ListDevices.Add(new Sensors() { SensorName = "Pedometer"     });                          
         }
 
-        public async void SelectedSensor(string SensorName){
-             
+        public void SelectedSensor(string SensorName){
+            
             if(SensorName == "Acelerometer"){
                 Acelerometer();
             }
@@ -55,9 +53,7 @@ namespace DeviceSensorsSample.ViewModels
 			else if (SensorName == "Pedometer")
 			{
 				Pedometer();
-			} 
-
-            await App.Navigation.PushAsync(new SensorDetailsPage(Sensor)); 
+			}
         }
 
 		public interface IDeviceSensor<T>
@@ -81,82 +77,87 @@ namespace DeviceSensorsSample.ViewModels
 			IDeviceSensor<int>                  Pedometer     { get; }
 		}
 
-        public async void Acelerometer (){
-            try
-            {
+        public void Acelerometer (){
+                StopThreads();  
                 if (CrossDeviceSensors.Current.Accelerometer.IsSupported)
                 { 
                     CrossDeviceSensors.Current.Accelerometer.OnReadingChanged += (s, a) =>
-                    { 
-                       // Sensor = new Sensors() { SensorName = "Acelerometer" , X = a.Reading.X, Y = a.Reading.Y, Z = a.Reading.Z };
-                        System.Diagnostics.Debug.WriteLine(" OnReadingChanged - Acelerometer   : X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
-                    };
+                    {
+                        FillData("Acelerometer" , a.Reading.X , a.Reading.Y , a.Reading.Z); 
+                    }; 
                     CrossDeviceSensors.Current.Accelerometer.StartReading(3000); 
-                }
-            }catch{ 
-            }
+                } 
 		}
 
 		public void Gyroscope()
-		{
+		{ 
+            StopThreads(); 
 			if (CrossDeviceSensors.Current.Gyroscope.IsSupported)
 			{
 				CrossDeviceSensors.Current.Gyroscope.OnReadingChanged += (s, a) =>
 				{ 
-                   
-					System.Diagnostics.Debug.WriteLine("OnReadingChanged: Gyroscope  X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
-				};
-				CrossDeviceSensors.Current.Gyroscope.StartReading(3000);
-				System.Diagnostics.Debug.WriteLine("StartReading: Gyroscope ");
-
-			}
-            System.Diagnostics.Debug.WriteLine(" Gyroscope");
+                    FillData("Gyroscope", a.Reading.X, a.Reading.Y, a.Reading.Z); 
+				};  
+				CrossDeviceSensors.Current.Gyroscope.StartReading(3000); 
+			} 
 		}
 
 		public void Magnetometer()
 		{
+            StopThreads(); 
             if (CrossDeviceSensors.Current.Magnetometer.IsSupported)
 			{
                 CrossDeviceSensors.Current.Magnetometer.OnReadingChanged += (s, a) =>
 				{ 
-					System.Diagnostics.Debug.WriteLine("OnReadingChanged: Magnetometer  X -> " + a.Reading.X + " Y-> " + a.Reading.Y + " Z -> " + a.Reading.Z);
-				};
-                CrossDeviceSensors.Current.Magnetometer.StartReading();
-				System.Diagnostics.Debug.WriteLine("StartReading: Magnetometer");
-
-			}
-            System.Diagnostics.Debug.WriteLine(" Magnetometer");
+                    FillData("Magnetometer" , a.Reading.X , a.Reading.Y , a.Reading.Z); 
+				};  
+                CrossDeviceSensors.Current.Magnetometer.StartReading(3000); 
+			} 
 		}
 
 		public void Barometer()
 		{
+            StopThreads();
             if (CrossDeviceSensors.Current.Barometer.IsSupported)
 			{
                 CrossDeviceSensors.Current.Barometer.OnReadingChanged += (s, a) =>
 				{ 
-                    System.Diagnostics.Debug.WriteLine("OnReadingChanged: Barometer -> " + a.Reading.ToString());
-				};
-                CrossDeviceSensors.Current.Barometer.StartReading();
-				System.Diagnostics.Debug.WriteLine("StartReading: Barometer ");
-
-			}
-			System.Diagnostics.Debug.WriteLine(" Barometer");
+                    FillData("Barometer" , a.Reading , 0 , 0); 
+				}; 
+                CrossDeviceSensors.Current.Barometer.StartReading(3000); 
+			} 
 		}
 
 		public void Pedometer()
 		{
+            StopThreads();
 			if (CrossDeviceSensors.Current.Pedometer.IsSupported)
 			{
 				CrossDeviceSensors.Current.Pedometer.OnReadingChanged += (s, a) =>
 				{ 
-					System.Diagnostics.Debug.WriteLine("OnReadingChanged: Pedometer -> " + a.Reading.ToString());
-				};
-				CrossDeviceSensors.Current.Pedometer.StartReading();
-				System.Diagnostics.Debug.WriteLine("StartReading: Pedometer");
-
+                    FillData("Pedometer" , a.Reading , 0 , 0); 
+				}; 
+				CrossDeviceSensors.Current.Pedometer.StartReading(3000); 
 			}
-            System.Diagnostics.Debug.WriteLine(" Pedometer");
 		}
+
+        public async void FillData(string SensorDescription, double XX , double YY , double ZZ){
+            Sensor = new Sensors() { 
+                SensorName     = SensorDescription, 
+                    X          = XX, 
+                    Y          = YY, 
+                    Z          = ZZ 
+                                   };
+            await App.Navigation.PushAsync(new SensorDetailsPage(Sensor));           
+        }
+
+        public void StopThreads(){
+            CrossDeviceSensors.Current.Accelerometer.StopReading();
+            CrossDeviceSensors.Current.Gyroscope.StopReading();
+            CrossDeviceSensors.Current.Magnetometer.StopReading();
+            CrossDeviceSensors.Current.Barometer.StopReading();
+            CrossDeviceSensors.Current.Pedometer.StopReading();
+        }
          
         public event PropertyChangedEventHandler PropertyChanged;
 }

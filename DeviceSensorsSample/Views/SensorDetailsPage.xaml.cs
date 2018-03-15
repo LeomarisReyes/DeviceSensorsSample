@@ -11,20 +11,14 @@ namespace DeviceSensorsSample.Views
         {
             InitializeComponent(); 
 
-            //BindingContext = new
-            //{
-            //    X = Sensor.X,
-            //    Y = Sensor.Y,
-            //    Z = Sensor.Y
-            //};
-
             BindingContext = new
             {
-                X = 0,
-                Y = 0,
-                Z = 0
-            };
-
+                SensorName = Sensor.SensorName,
+                X          = Sensor.X,
+                Y          = Sensor.Y,
+                Z          = Sensor.Y
+            }; 
+             
         }
     }
 }
