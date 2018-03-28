@@ -3,7 +3,7 @@
 	<StackLayout Spacing="4">
         <StackLayout Spacing="4">  
             <Frame CornerRadius="8" BackgroundColor="Silver" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                     <Label x:Name="lblTitle" Text="Sensors List"/>
+                     <Label x:Name="lblTitle" Text="Sensors List&#10;"/>
             </Frame>   
        </StackLayout>
         <StackLayout Spacing="3" x:Name="mainLayout">
@@ -13,7 +13,7 @@
                           <ViewCell> 
                                <StackLayout Spacing="4">  
                                 <Frame HasShadow = "true" CornerRadius="20" BackgroundColor="#cce6ff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                    <Label Text="{Binding SensorName}" />
+                                    <Label x:Name="lblSensor" Text="{Binding SensorName}" />
                                     <Label.GestureRecognizers>
                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.ActionSensor, Source={x:Reference mainLayout}}" CommandParameter="{Binding SensorName}"/>
                                     </Label.GestureRecognizers>

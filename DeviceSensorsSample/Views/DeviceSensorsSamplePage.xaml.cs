@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DeviceSensorsSample.Models;
 using DeviceSensorsSample.ViewModels;
+using Plugin.DeviceSensors.Shared;
 using Xamarin.Forms;
 
 namespace DeviceSensorsSample
@@ -11,7 +13,7 @@ namespace DeviceSensorsSample
         {
             InitializeComponent();
             BindingContext = new DeviceSensorsViewModel();
-             
+
             if(Device.RuntimePlatform == Device.iOS)
             {
                 this.Padding = new Thickness(0, 20, 0, 0);

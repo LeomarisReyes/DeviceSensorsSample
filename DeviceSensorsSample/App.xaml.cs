@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using DeviceSensorsSample.Views;
+using Xamarin.Forms;
 
 namespace DeviceSensorsSample
 {

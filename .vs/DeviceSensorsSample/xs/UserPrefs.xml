@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{3BA456D3-26E9-483D-BE39-E5224FAD51C3}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DeviceSensorsSample/ViewModels/DeviceSensorDetailViewModel.cs">
     <Files>
-      <File FileName="DeviceSensorsSample/Views/SensorDetailsPage.xaml.cs" Line="21" Column="14" />
-      <File FileName="DeviceSensorsSample/Views/SensorDetailsPage.xaml" Line="12" Column="142" />
-      <File FileName="DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs" Line="57" Column="1" />
+      <File FileName="DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs" Line="15" Column="9" />
+      <File FileName="DeviceSensorsSample/Views/DeviceSensorDetailPage.xaml.cs" Line="58" Column="1" />
+      <File FileName="DeviceSensorsSample/Views/DeviceSensorDetailPage.xaml" Line="26" Column="65" />
+      <File FileName="DeviceSensorsSample/ViewModels/ISensorReader.cs" Line="5" Column="7" />
       <File FileName="DeviceSensorsSample/Views/DeviceSensorsSamplePage.xaml" Line="29" Column="1" />
-      <File FileName="DeviceSensorsSample/Models/Sensors.cs" Line="1" Column="1" />
+      <File FileName="DeviceSensorsSample/Views/DeviceSensorsSamplePage.xaml.cs" Line="15" Column="41" />
       <File FileName="Source Not Available" />
+      <File FileName="DeviceSensorsSample/ViewModels/DeviceSensorDetailViewModel.cs" Line="21" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.DeviceSensorsSample.Droid PreferredExecutionTarget="Android.01d16723cf9d46e2" AndroidDesignerPreferredTheme="Theme.DeviceDefault.NoActionBar.Fullscreen" />
@@ -14,7 +16,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/leomaris/Projects/DeviceSensorsSample/DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs" relfile="DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs" line="57" column="1" />
+      <Breakpoint file="/Users/leomaris/Projects/DeviceSensorsSample/DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs" relfile="DeviceSensorsSample/ViewModels/DeviceSensorsViewModel.cs" line="14" column="1" />
+      <Breakpoint file="/Users/leomaris/Projects/DeviceSensorsSample/DeviceSensorsSample/ViewModels/ISensorReader.cs" relfile="DeviceSensorsSample/ViewModels/ISensorReader.cs" line="6" column="38" />
+      <Breakpoint file="/Users/leomaris/Projects/DeviceSensorsSample/DeviceSensorsSample/Views/DeviceSensorDetailPage.xaml.cs" relfile="DeviceSensorsSample/Views/DeviceSensorDetailPage.xaml.cs" line="24" column="1" />
+      <Breakpoint file="/Users/leomaris/Projects/DeviceSensorsSample/DeviceSensorsSample/Views/DeviceSensorDetailPage.xaml.cs" relfile="DeviceSensorsSample/Views/DeviceSensorDetailPage.xaml.cs" line="53" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
