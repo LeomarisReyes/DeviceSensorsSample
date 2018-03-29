@@ -15,10 +15,13 @@ namespace DeviceSensorsSample.ViewModels
         public Sensors Sensor                 { get; set; }
         public List<Sensors>   ListDevices    { get; set; }
         public Command<string> ActionSensor   { get; set; } 
-         
+        public Command         StartThread    { get; set; }
+        public Command         StopThread     { get; set; }
+        public string          Time           { get; set; }
+
         public DeviceSensorsViewModel()
         {
-            ActionSensor = new Command<string>(SelectedSensor);
+            ActionSensor = new Command<string>(SelectedSensor); 
             FillListDevices();
         }
 
@@ -55,6 +58,6 @@ namespace DeviceSensorsSample.ViewModels
                 await App.Navigation.PushAsync(new DeviceSensorDetailPage(SensorInformation.Pedometer)); 
             } 
         } 
-         
+          
 }
 }

@@ -2,41 +2,46 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DeviceSensorsSample.Views.DeviceSensorDetailPage">
     <ContentPage.Content>
         <StackLayout Spacing="0"> 
-            <StackLayout Spacing="1" Orientation = "Horizontal">   
-                  <Label x:Name="lblTitle" Text="{Binding SensorName}"
-                         HorizontalOptions = "Center"
-                         FontAttributes  = "Bold"
-                         FontSize        = "19"
-                         Margin          = "0,0,0,15"/>  
-           </StackLayout>
-            
             <StackLayout Spacing="1" Orientation = "Vertical"> 
                 
                  <Label Text            = "Seconds Interval:"
                         FontSize        = "15"
                         FontAttributes  = "Bold"/>
-                    
-                 <Entry  x:Name            = "EntryTime"
-                         Text              = "{Binding Time}" 
-                         Placeholder       = "Write here Second Interval" 
-                         HorizontalOptions = "FillAndExpand" /> 
+
+                  <StackLayout Spacing="1" Orientation = "Horizontal"> 
+                     <Label x:Name              = "intervalLabel" 
+                            Text                = "1"
+                            FontSize            = "20"
+                            Margin              = "10,0,20,0"
+                            VerticalOptions     = "CenterAndExpand"
+                            HorizontalOptions   = "CenterAndExpand"
+                            FontAttributes      = "Bold"/>
+                        
+                     <Stepper Value            = "1" 
+                             Maximum           = "100"
+                             Minimum           = "0"
+                             Increment         = "1"
+                             HorizontalOptions = "FillAndExpand" 
+                              ValueChanged      = "Handle_ValueChanged"/> 
+                </StackLayout>
                 
                  <Button Text = "Start" 
                          HorizontalOptions = "FillAndExpand" 
-                         Command           = "{Binding Start}"  
+                         Command           = "{Binding StartCommand}"
                         />
                  <Button Text = "Stop" 
                          HorizontalOptions = "FillAndExpand"
                          Margin            = "0,0,0,15"
-                         Command           = "{Binding Stop}"/> 
+                         Command           = "{Binding StopCommand}"/> 
 
                 <Label Text                = "Reading :"
                        FontSize            = "16"
                        FontAttributes      = "Bold"
                        Margin              = "10,0,0,15"/>
 
-                <Label  Text               = "{Binding Coordenates}"
-                        FontSize            = "16" 
+                <Label  x:Name             = "Reading"
+                        Text               = "{Binding Coordenates}"
+                        FontSize           = "16" 
                         Margin             = "10,0,0,0"/>
             </StackLayout>
     </StackLayout> 

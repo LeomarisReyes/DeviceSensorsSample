@@ -12,77 +12,76 @@ namespace DeviceSensorsSample.Views
     public partial class DeviceSensorDetailPage: INotifyPropertyChanged 
     {
         ISensorReader activeReader;
-        public Command StartThread  { get; set; } 
-        public Command StopThread   { get; set; }
-        public int     Seconds      { get; set; }
+        bool activeReading = false;
 
         public DeviceSensorDetailPage(SensorInformation dataSensor)
         { 
-            StartThread = new Command(Start);
-            StopThread  = new Command(Stop);
-             
             switch (dataSensor)
             { 
                 case SensorInformation.Acelerometer:
                     activeReader = new DeviceSensorDetailViewModel<VectorReading>(CrossDeviceSensors.Current.Accelerometer, (data) =>
-                     {
-                        SetData($"{SensorInformation.Acelerometer}" , $" X -> {data.X} - Y -> {data.Y} - Z ->  {data.Z}");
+                     { 
+                        Reading.Text = $" X -> {data.X} - Y -> {data.Y} - Z ->  {data.Z}"; 
                      }); 
                     break;
 
                 case SensorInformation.Magnetometer:
                     activeReader = new DeviceSensorDetailViewModel<VectorReading>(CrossDeviceSensors.Current.Magnetometer, (data) =>
                     {
-                        SetData($"{SensorInformation.Magnetometer}", $" X -> {data.X} - Y -> {data.Y} - Z ->  {data.Z}");
+                        Reading.Text = $" X -> {data.X} - Y -> {data.Y} - Z ->  {data.Z}"; 
                     }); 
                     break;
 
                 case SensorInformation.Gyroscope:
                     activeReader = new DeviceSensorDetailViewModel<VectorReading>(CrossDeviceSensors.Current.Gyroscope, (data) =>
                     {
-                        SetData($"{SensorInformation.Gyroscope}", $" X -> {data.X} - Y -> {data.Y} - Z ->  {data.Z}");
+                        Reading.Text = $" X -> {data.X} - Y -> {data.Y} - Z ->  {data.Z}"; 
                     }); 
                     break;
                 case SensorInformation.Barometer:
                     activeReader = new DeviceSensorDetailViewModel<double>(CrossDeviceSensors.Current.Barometer, (data) =>
                     {
-                        SetData($"{SensorInformation.Barometer}", $"{data}");
+                        Reading.Text = $"{data}"; 
                     });  
                     break;
 
                 case SensorInformation.Pedometer:
                     activeReader = new DeviceSensorDetailViewModel<int>(CrossDeviceSensors.Current.Pedometer, (data) =>
                     {
-                        SetData($"{SensorInformation.Pedometer}", $"{data}"); 
-                    });
-                    activeReader.StartReading(500);
+                        Reading.Text = $"{data}"; 
+                    }); 
                     break; 
             }  
-            InitializeComponent();  
-            SetData("", "");
-        } 
+            InitializeComponent();
+            BindingContext = activeReader; 
+        }
 
-        public void SetData(string sensorname , string coordenates)
-        {
-            BindingContext = new
+
+		protected override void OnAppearing()
+		{
+            base.OnAppearing();
+            if (activeReading){
+                activeReader.StartReading(activeReader.Interval);
+            }
+		}
+
+		protected override void OnDisappearing()
+		{
+            base.OnDisappearing();
+            activeReading = activeReader.IsReading;
+
+            if (activeReading)
             {
-                SensorName  = sensorname,
-                Coordenates = coordenates , 
-                Start       = StartThread,
-                Stop        = StopThread
-            };
-        }
-         
-        public void Start()
-        {    
-            activeReader.StartReading(500);  
-        }
+                activeReader.StopReading(); 
+            }
+		}
 
-        public void Stop()
+        void Handle_ValueChanged(object sender, Xamarin.Forms.ValueChangedEventArgs e)
         {
-            activeReader.StopReading();
-        } 
+            activeReader.Interval = (int)e.NewValue;
+            intervalLabel.Text = $"{e.NewValue}";
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }
